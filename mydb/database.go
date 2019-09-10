@@ -7,7 +7,6 @@ import (
 
 var once sync.Once
 
-var isActive bool
 var lock = sync.Mutex{}
 var stored map[string]string
 
@@ -15,25 +14,15 @@ func New() {
 	lock.Lock()
 	defer lock.Unlock()
 
-	if !isActive {
-		// once.Do(func() {
-		// stored = make(map[string]string)
-		// isActive = true
-		// })
+	once.Do(func() {
+		fmt.Println("new class")
 		stored = make(map[string]string)
-		isActive = true
-	} else {
-		fmt.Println("Sono un singleton!!")
-	}
+	})
 }
 
 func Close() {
 	lock.Lock()
 	defer lock.Unlock()
-	if !isActive {
-		return
-	}
-	isActive = false
 	stored = nil
 }
 
