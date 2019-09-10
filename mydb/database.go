@@ -16,10 +16,6 @@ func New() {
 	defer lock.Unlock()
 
 	if !isActive {
-		// once.Do(func() {
-		// stored = make(map[string]string)
-		// isActive = true
-		// })
 		stored = make(map[string]string)
 		isActive = true
 	} else {
